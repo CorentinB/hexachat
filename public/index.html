@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+ <head>
+   <link rel="stylesheet" href="style.css" />
+   <title>BytesChat</title>
+   <style>
+   </style>
+   <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+ </head>
+ <body id="logged-out">
+   <section id="chat">
+     <ul id="messages"></ul>
+     <form action="">
+       <input id="m" autocomplete="off" /><button>Send</button>
+     </form>
+   </section>
+   <section id="login">
+      <form action="">
+        <label for="u">Username</label>
+        <input id="u" autocomplete="off" autofocus />
+        <p>
+          <button>Login</button>
+        </p>
+      </form>
+    </section>
+   <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+   <script src="client.js"></script>
+ </body>
+</html>
