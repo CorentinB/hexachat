@@ -40,6 +40,8 @@ section#chat #messages {
     padding: 0;
     padding-bottom: 50px;
     font-size: 15px;
+    display: inline-block;
+    width: calc(100% - 250px);
 }
 section#chat #messages li {
     padding: 5px 10px;
@@ -112,4 +114,34 @@ section#chat #messages li span.info {
     color: white;
     background: #e67e22;
     border-radius: 5px;
+}
+
+html, body, head {
+    height: 100%;
+}
+section#chat {
+    height: 100%;
+}
+section#chat #users {
+    display: inline-block;
+    position: fixed;
+    vertical-align: top;
+    overflow: auto;
+    width: 250px;
+    list-style-type: none;
+    height: 100%;
+    padding-bottom: 50px;
+    border-left: 3px solid #eee;
+}
+section#chat #users li.new {
+    background: #e67e22;
+    color: white;
+}
+section#chat #users li {
+    padding: 6px 10px;
+    margin: 10px 10px;
+    border-radius: 5px;
+    border: 1px solid #e67e22;
+    color: black;
+    transition: all 0.5s;
 }

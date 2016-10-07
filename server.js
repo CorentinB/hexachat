@@ -16,16 +16,20 @@ http.listen(3000, function(){
   console.log('----------------------------------------------\n'.rainbow.bold);
 });
 
-//On check si un user se connecte
+// List for connected users
+var users = [];
+
+// Connection checking
 io.on('connection', function(socket){
-      /**
-       * Utilisateur connecté à la socket
-       */
+      // Variable for connected user
       var loggedUser;
 
-      /**
-       * Déconnexion d'un utilisateur : broadcast d'un 'service-message'
-       */
+      // Emission d'un événement "user-login" pour chaque utilisateur connecté
+      for (i = 0; i < users.length; i++) {
+        socket.emit('user-login', users[i]);
+      }
+
+      // Déconnexion d'un utilisateur : broadcast d'un 'service-message'
       socket.on('disconnect', function () {
         if (loggedUser !== undefined) {
           console.log('User disconnected : '.red.bold + loggedUser.username.red);
@@ -34,23 +38,49 @@ io.on('connection', function(socket){
             type: 'logout'
           };
           socket.broadcast.emit('service-message', serviceMessage);
-        }
+          // Suppression de la liste des connectés
+          var userIndex = users.indexOf(loggedUser);
+          if (userIndex !== -1) {
+            users.splice(userIndex, 1);
+          }
+          // Emission d'un 'user-logout' contenant le user
+          io.emit('user-logout', loggedUser);
+          }
       });
 
-      /**
-       * Connexion d'un utilisateur via le formulaire :
-       *  - sauvegarde du user
-       *  - broadcast d'un 'service-message'
-       */
-      socket.on('user-login', function (user) {
+      ////////////////////////////////////////////////////
+      //  Connexion d'un utilisateur via le formulaire  //
+      ////////////////////////////////////////////////////
+
+      socket.on('user-login', function (user, callback) {
+        // Vérification que l'utilisateur n'existe pas
+        var userIndex = -1;
+        for (i = 0; i < users.length; i++) {
+          if (users[i].username === user.username) {
+            userIndex = i;
+          }
+        }
         loggedUser = user;
-        if (loggedUser !== undefined) {
+        if (loggedUser !== undefined && userIndex === -1) { // S'il est bien nouveau
+          // Sauvegarde de l'utilisateur et ajout à la liste des connectés
+          users.push(loggedUser);
+          // Envoi des messages de service
           console.log('User connected : '.green.bold + loggedUser.username.green);
-          var serviceMessage = {
+          var userServiceMessage = {
+            text: 'You logged in as "' + loggedUser.username + '"',
+            type: 'login'
+          };
+          var broadcastedServiceMessage = {
             text: 'User "' + loggedUser.username + '" logged in',
             type: 'login'
           };
-          socket.broadcast.emit('service-message', serviceMessage);
+          socket.emit('service-message', userServiceMessage);
+          socket.broadcast.emit('service-message', broadcastedServiceMessage);
+          // Emission de 'user-login' et appel du callback
+          io.emit('user-login', loggedUser);
+          callback(true);
+        } else {
+          callback(false);
         }
       });
 
