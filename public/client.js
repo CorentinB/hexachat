@@ -77,7 +77,7 @@ socket.on('service-message', function (message) {
 
 // Connexion d'un nouvel utilisateur
 socket.on('user-login', function (user) {
-  $('#users').append($('<li class="' + user.username + ' new">').html(user.username + '<span class="typing">typing</span>'));
+  $('#users').append($('<li class="' + user.username + ' new">').html(user.username + '<span class="typing">Typing...</span>'));
   setTimeout(function () {
     $('#users li.new').removeClass('new');
   }, 1000);
