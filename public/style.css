@@ -38,6 +38,7 @@ section#chat #messages {
     list-style-type: none;
     margin: 0;
     padding: 0;
+    padding-bottom: 50px;
     font-size: 15px;
 }
 section#chat #messages li {
