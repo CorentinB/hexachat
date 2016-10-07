@@ -18,6 +18,10 @@ http.listen(3000, function(){
 
 // List for connected users
 var users = [];
+// Latest messages
+var messages = [];
+// List users while typing
+var typingUsers = [];
 
 // Connection checking
 io.on('connection', function(socket){
@@ -27,6 +31,15 @@ io.on('connection', function(socket){
       // Emission d'un événement "user-login" pour chaque utilisateur connecté
       for (i = 0; i < users.length; i++) {
         socket.emit('user-login', users[i]);
+      }
+
+      // Emission d'un événement "chat-message" pour chaque message de l'historique
+      for (i = 0; i < messages.length; i++) {
+        if (messages[i].username !== undefined) {
+          socket.emit('chat-message', messages[i]);
+        } else {
+          socket.emit('service-message', messages[i]);
+        }
       }
 
       // Déconnexion d'un utilisateur : broadcast d'un 'service-message'
@@ -43,8 +56,15 @@ io.on('connection', function(socket){
           if (userIndex !== -1) {
             users.splice(userIndex, 1);
           }
+          // Ajout du message à l'historique
+          messages.push(serviceMessage);
           // Emission d'un 'user-logout' contenant le user
           io.emit('user-logout', loggedUser);
+          // Si jamais il était en train de saisir un texte, on l'enlève de la liste
+          var typingUserIndex = typingUsers.indexOf(loggedUser);
+          if (typingUserIndex !== -1) {
+            typingUsers.splice(typingUserIndex, 1);
+          }
           }
       });
 
@@ -76,6 +96,7 @@ io.on('connection', function(socket){
           };
           socket.emit('service-message', userServiceMessage);
           socket.broadcast.emit('service-message', broadcastedServiceMessage);
+          messages.push(broadcastedServiceMessage);
           // Emission de 'user-login' et appel du callback
           io.emit('user-login', loggedUser);
           callback(true);
@@ -91,5 +112,32 @@ io.on('connection', function(socket){
         message.username = loggedUser.username;
         io.emit('chat-message', message);
         console.log('Message from '.green.bold + loggedUser.username.green.bold + ' : '.green.bold + message.text.green);
+        messages.push(message);
+        if (messages.length > 150) {
+          messages.splice(0, 1);
+        }
+      });
+      /**
+       * Réception de l'événement 'start-typing'
+       * L'utilisateur commence à saisir son message
+       */
+      socket.on('start-typing', function () {
+        // Ajout du user à la liste des utilisateurs en cours de saisie
+        if (typingUsers.indexOf(loggedUser) === -1) {
+          typingUsers.push(loggedUser);
+        }
+        io.emit('update-typing', typingUsers);
+      });
+
+      /**
+       * Réception de l'événement 'stop-typing'
+       * L'utilisateur a arrêter de saisir son message
+       */
+      socket.on('stop-typing', function () {
+        var typingUserIndex = typingUsers.indexOf(loggedUser);
+        if (typingUserIndex !== -1) {
+          typingUsers.splice(typingUserIndex, 1);
+        }
+        io.emit('update-typing', typingUsers);
       });
     });
