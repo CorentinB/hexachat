@@ -6,12 +6,12 @@
 body {
     font: 13px Helvetica, Arial;
     transition: all 0.5s;
-    background-color: #644D52;
+    background-color: #324554;
     color:white;
 }
 
 section#chat form {
-    background: #3e4249;
+    background: #324554;
     padding: 3px;
     position: fixed;
     bottom: 0;
@@ -25,14 +25,14 @@ section#chat form input {
     height: 100%;
     margin-right: .5%;
     font-size: 20px;
-    background: saddlebrown;
+    background: #243447;
     color: white;
     border-radius: 3px;
 }
 section#chat form button {
     width: 9.5%;
     height: 100%;
-    background: #e67e22;
+    background: #243447;
     float: right;
     border: none;
     font-size: 17px;
@@ -60,7 +60,7 @@ body#logged-out {
 body#logged-out section#chat {
     filter: blur(300px);
     /*-webkit-filter: blur(100px);*/
-    background: saddlebrown;
+    background: #243447;
 }
 body#logged-out section#login {
     opacity: 1;
@@ -90,7 +90,7 @@ section#login input#u:focus {
     outline: none;
 }
 section#login button {
-    background: #e67e22;
+    background: #243447;
     border: none;
     padding: 5px 80px;
     color: white;
@@ -104,22 +104,22 @@ section#chat #messages li span.username {
     padding: 6px 10px;
     margin-right: 5px;
     color: white;
-    background: #e67e22;
+    background: #243447;
     border-radius: 5px;
 }
 
 section#chat #messages li.logout {
-    background: #F77A52;
+    background: #243447;
 }
 section#chat #messages li.login {
-    background: #FF974F;
+    background: #243447;
 }
 section#chat #messages li span.info {
     display: inline-block;
     padding: 3px 10px;
     margin-right: 5px;
     color: white;
-    background: #e67e22;
+    background: #243447;
     border-radius: 5px;
 }
 
@@ -138,20 +138,20 @@ section#chat #users {
     list-style-type: none;
     height: 100%;
     padding-bottom: 50px;
-    border-left: 3px solid #332532;
+    border-left: 3px solid #243447;
 }
 section#chat #users li.new {
-    background: #e67e22;
+    background: #243447;
     color: white;
 }
 section#chat #users li {
     padding: 6px 10px;
     margin: 10px 10px;
     border-radius: 5px;
-    border: 1px solid #332532;
+    border: 1px solid #243447;
     color: white;
     transition: all 0.5s;
-    background: saddlebrown;
+    background: #243447;
 }
 section#chat #users li span.typing {
     float: right;
