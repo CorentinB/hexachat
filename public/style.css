@@ -4,7 +4,8 @@
     box-sizing: border-box;
 }
 body {
-    font: 13px Helvetica, Arial;
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
     transition: all 0.5s;
     background-color: #324554;
     color:white;
@@ -72,7 +73,7 @@ section#login {
     background-color: #324554;
     position: fixed;
     width: 400px;
-    height: 275px;
+    height: 295px;
     z-index: 15;
     top: 50%;
     left: 50%;
@@ -93,6 +94,7 @@ section#login input#u {
     text-align: center;
     padding: 5px;
     border: 5px solid rgb(158, 158, 158);
+    border-radius: 10px;
 }
 section#login input#u:focus {
     outline: none;
@@ -226,4 +228,12 @@ video#bgvid {
     transform: translateX(-50%) translateY(-50%);
     background: url(polina.jpg) no-repeat;
     background-size: cover;
+}
+
+#log{
+    border-radius: 10px;
+}
+
+.heart{
+    color:red;
 }
