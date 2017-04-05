@@ -8,11 +8,15 @@
    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
  </head>
  <body id="logged-out">
+    <video playsinline autoplay muted loop poster="Cable_Car/Cable_Car.jpg" id="bgvid">
+        <source src="Cable_Car/Cable_Car.webm" type="video/webm">
+        <source src="Cable_Car/Cable_Car.mp4" type="video/mp4">
+    </video>
    <section id="chat">
      <ul id="messages">
      </ul><ul id="users">
      </ul>
-     <form action="">
+     <form id="dial-bar" action="">
        <input id="m" autocomplete="off" /><button>Send</button>
      </form>
    </section>

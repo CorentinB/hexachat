@@ -7,7 +7,8 @@ function scrollToBottom() {
     $("html, body").animate({ scrollTop: $(document).height() }, 0);
   }
 }
-
+$('#chat').hide();
+$('#bgvid').show();
 // Connexion d'un utilisateur
 $('#login form').submit(function (e) {
   e.preventDefault();
@@ -19,6 +20,9 @@ $('#login form').submit(function (e) {
         if(success){
           $('body').removeAttr('id'); // Cache formulaire de connexion
           $('#chat input').focus(); // Focus sur le champ du message
+          $('#bgvid').hide();
+          $('#chat').show();
+          $('#login').hide();
         }
     });
   }

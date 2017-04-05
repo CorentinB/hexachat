@@ -52,15 +52,15 @@ section#chat #messages li {
     padding: 5px 10px;
 }
 section#chat #messages li:nth-child(odd) {
-    background: #332532;
+    background: #243447;
 }
 body#logged-out {
     background: rgb(223, 223, 223);
 }
 body#logged-out section#chat {
-    filter: blur(300px);
+    /*filter: blur(300px);
     /*-webkit-filter: blur(100px);*/
-    background: #243447;
+    /*background: #243447;*/
 }
 body#logged-out section#login {
     opacity: 1;
@@ -68,12 +68,19 @@ body#logged-out section#login {
 
 section#login {
     transition: all 0.5s;
-    opacity: 0;
-    top: 30%;
-    bottom: 30%;
-    text-align: center;
-    position: fixed;
-    width: 100%;
+    opacity: 0.5;
+    background-color: #324554;
+    position: absolute;
+    width: 300px;
+    height: 200px;
+    z-index: 15;
+    top: 50%;
+    left: 50%;
+    margin: -100px 0 0 -150px;
+    /*padding-bottom: 5%;
+    padding-top: 5%;
+    padding-left: 5%;
+    padding-right: 5%;*/
 }
 section#login label[for="u"] {
     display: block;
@@ -201,4 +208,21 @@ section#chat #users li span.typing {
 @-o-keyframes fadein {
     from { opacity: 0; }
     to   { opacity: 1; }
+}
+
+video#bgvid {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    background: url(polina.jpg) no-repeat;
+    background-size: cover;
 }
