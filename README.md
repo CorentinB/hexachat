@@ -1,4 +1,4 @@
-# BytesChat 0.1.0
+# HexaChat 1.0
 :zap: Light and fast web-chat using Node.JS [WIP]
 
 **NB**: This is a WIP project, a loooooot of functionnality are actually not available, star the project if you want to get an alert when I'm updating it !
