@@ -9,13 +9,18 @@ function scrollToBottom() {
 }
 $('#chat').hide();
 $('#bgvid').show();
+
+//Caractères autorisés et interdits
+var caractAllowed = /^[a-z]*$/i;
+
 // Connexion d'un utilisateur
 $('#login form').submit(function (e) {
   e.preventDefault();
   var user = {
     username : $('#login input').val().trim()
   };
-  if (user.username.length > 0) { // Si le champ de connexion n'est pas vide
+
+  if (user.username.length > 0 && user.username.length <= 12 && caractAllowed.test(user.username)) { // Si le champ de connexion n'est pas vide
     socket.emit('user-login', user, function(success){
         if(success){
           $('body').removeAttr('id'); // Cache formulaire de connexion
@@ -25,6 +30,8 @@ $('#login form').submit(function (e) {
           $('#login').hide();
         }
     });
+  } else {
+    $('#u').effect("shake", {}, "fast");
   }
 });
 
@@ -59,14 +66,19 @@ $('#chat form').submit(function (e) {
   $('#m').val('');
   if (message.text.trim().length !== 0) { // Gestion message vide
     socket.emit('chat-message', message);
+  } else { // Chat devient temporairement rouge si message incorect
+    $("#m").effect("highlight", {color: '#9E2E29'}, 1500);
   }
   $('#chat input').focus(); // Focus sur le champ du message
 });
 
-// Réception d'un message
+// Réception d'un message AVEC PROTECTION CONTRE FAILLE XSS
 socket.on('chat-message', function (message) {
-  $('#messages').append($('<li>').html('<span class="username">' + message.username + '</span> ' + message.text));
-  scrollToBottom();
+  var $line = $('<li>')
+ .append($('<span class="username">').text(message.username))
+ .append(' ')
+ .append($('<span>').text(message.text));
+$('#messages').append($line);
 });
 
 // Réception d'un message de service
