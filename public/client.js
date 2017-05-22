@@ -10,8 +10,9 @@ function scrollToBottom() {
 $('#chat').hide();
 $('#bgvid').show();
 
-//Caractères autorisés et interdits
-var caractAllowed = /^[a-z]*$/i;
+//Caractères autorisés et insultes interdites
+var caractAllowed = /^[a-z0-9]*$/i;
+var badWords = /(bougnoule|crétin|cretin|connar|conar|connasse|encul*|fdp|foulard|ntm|n*gre|n*gro|pute|gueule|tg|salop)/i;
 
 // Connexion d'un utilisateur
 $('#login form').submit(function (e) {
@@ -20,7 +21,7 @@ $('#login form').submit(function (e) {
     username : $('#login input').val().trim()
   };
 
-  if (user.username.length > 0 && user.username.length <= 12 && caractAllowed.test(user.username)) { // Si le champ de connexion n'est pas vide
+  if (user.username.length > 0 && user.username.length <= 12 && caractAllowed.test(user.username) && badWords.test(user.username) == false) { // Si le champ de connexion n'est pas vide
     socket.emit('user-login', user, function(success){
         if(success){
           $('body').removeAttr('id'); // Cache formulaire de connexion
@@ -64,9 +65,10 @@ $('#chat form').submit(function (e) {
     text : $('#m').val()
   };
   $('#m').val('');
-  if (message.text.trim().length !== 0) { // Gestion message vide
+
+  if (message.text.trim().length !== 0 && message.text.trim().length <= 208 && badWords.test(message.text) == false) { // Gestion message vide
     socket.emit('chat-message', message);
-  } else { // Chat devient temporairement rouge si message incorect
+  } else if (message.text.trim().length > 208 || badWords.test(message.text) == true) { // Chat devient temporairement rouge si message incorect
     $("#m").effect("highlight", {color: '#9E2E29'}, 1500);
   }
   $('#chat input').focus(); // Focus sur le champ du message
