@@ -1,3 +1,4 @@
+
 * {
     margin: 0;
     padding: 0;
@@ -9,7 +10,7 @@ body {
     transition: all 0.5s;
     background-color: #324554;
     color:white;
-}
+}/*texte page acceuil*/
 
 section#chat form {
     background: #324554;
@@ -18,7 +19,8 @@ section#chat form {
     bottom: 0;
     width: 100%;
     height: 50px;
-}
+}/*barre d'écriture*/
+
 section#chat form input {
     border: 0;
     padding: 5px 10px;
@@ -29,7 +31,8 @@ section#chat form input {
     background: #243447;
     color: white;
     border-radius: 3px;
-}
+}/*texte dans la barre d'écriture*/
+
 section#chat form button {
     width: 9.5%;
     height: 100%;
@@ -39,7 +42,8 @@ section#chat form button {
     font-size: 17px;
     color: white;
     border-radius: 3px;
-}
+}/*bouton send*/
+
 section#chat #messages {
     list-style-type: none;
     margin: 0;
@@ -48,16 +52,20 @@ section#chat #messages {
     font-size: 15px;
     display: inline-block;
     width: calc(100% - 250px);
-}
+}/*taille de la police des messages*/
+
 section#chat #messages li {
     padding: 5px 10px;
-}
+}/*taille des bande de messages*/
+
 section#chat #messages li:nth-child(odd) {
     background: #243447;
 }
+
 body#logged-out {
     background: rgb(223, 223, 223);
 }
+
 body#logged-out section#chat {
     /*filter: blur(300px);
     /*-webkit-filter: blur(100px);*/
@@ -88,14 +96,16 @@ section#login label[for="u"] {
     display: block;
     font-size: 24px;
     margin-bottom: 10px;
-}
+}/*police username: ... en acceuil*/
+
 section#login input#u {
     font-size: 25px;
     text-align: center;
     padding: 5px;
     border: 5px solid rgb(158, 158, 158);
     border-radius: 10px;
-}
+}/*barre d'enté du pseudo*/
+
 section#login input#u:focus {
     outline: none;
 }
@@ -107,7 +117,7 @@ section#login button {
     font-size: 20px;
     margin-top: 20px;
     cursor: pointer;
-}
+}/*boutton login*/
 
 section#chat #messages li span.username {
     display: inline-block;
@@ -116,7 +126,7 @@ section#chat #messages li span.username {
     color: white;
     background: #243447;
     border-radius: 5px;
-}
+} /*pseudo in chat*/
 
 section#chat #messages li.logout {
     background: #243447;
@@ -131,7 +141,7 @@ section#chat #messages li span.info {
     color: white;
     background: #243447;
     border-radius: 5px;
-}
+}/*information HG*/
 
 html, body, head {
     height: 100%;
@@ -149,11 +159,13 @@ section#chat #users {
     height: 100%;
     padding-bottom: 50px;
     border-left: 3px solid #243447;
-}
+}/*liste utilisateur connecté*/
+
 section#chat #users li.new {
     background: #243447;
     color: white;
-}
+}/*couleur du nom d'utilisateur dans la liste de connecté avec remise en blanc*/
+
 section#chat #users li {
     padding: 6px 10px;
     margin: 10px 10px;
@@ -162,13 +174,14 @@ section#chat #users li {
     color: white;
     transition: all 0.5s;
     background: #243447;
-}
+}/*couleur du nom d'utilisateur dans la liste après remise en blanc*/
+
 section#chat #users li span.typing {
     float: right;
     font-style: italic;
-    color: black;
+    color: red;
     display: none;
-}
+}/*typing*/
 
 /* fade-in BYTESCHAT MESSAGE LOGIN */
 
