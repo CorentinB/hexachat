@@ -9,10 +9,12 @@ var colour = require('colour');
 // On gère les requêtes HTTP des utilisateurs en leur renvoyant les fichiers du dossier 'public'
 app.use("/", express.static(__dirname + "/public"));
 
+
 // On lance le serveur en écoutant les connexions arrivant sur le port 3000
-http.listen(3000, function(){
+var serverPort = process.env.HEXACHAT_PORT || 3000;
+http.listen(serverPort, function(){
   console.log('\n----------------------------------------------'.rainbow.bold);
-  console.log('\nServer is listening on : '.rainbow.bold + 'http://localhost:3000\n'.green.bold);
+  console.log('\nServer is listening on : '.rainbow.bold + ('http://localhost:'+serverPort+'\n').green.bold);
   console.log('----------------------------------------------\n'.rainbow.bold);
 });
 
@@ -111,7 +113,6 @@ io.on('connection', function(socket){
       socket.on('chat-message', function (message) {
         message.username = loggedUser.username;
         io.emit('chat-message', message);
-        console.log('Message from '.green.bold + loggedUser.username.green.bold + ' : '.green.bold + message.text.green);
         messages.push(message);
         if (messages.length > 150) {
           messages.splice(0, 1);
