@@ -12,7 +12,7 @@ $('#bgvid').show();
 
 //Caractères autorisés et insultes interdites
 var caractAllowed = /^[a-z0-9éè]*$/i;
-var badWords = /(?:^|\s)(?:bougnoule|cr[éeè]tin|con+ar|con+ard|con+as+e|encul.|enflure|f+d+p+|keh|n+t+m+|n.gre|n.gro|p.tasse|p+d+|p+u+t+e+|gueule|t+g+|salop.|salau.)(?:\s|$)/i;
+var badWords = /(?:^|\s)(?:bougnoule|cr[éeè]tin|c+o+n+ar+|c+o+n+a+r+d+|c+o+n+a+s+e+|encul.|enflure|f+d+p+|keh|n+t+m+|n.gre|n.gro|p.tasse|p+d+|p+u+t+e+|g+u+e+u+l+e+|t+g+|s+a+l+o+p.|s+a+l+o+p+)(?:\s|$)/i;
 
 var myscroll = $('body'); // Chemin de body (il ne change pas, donc autant ne l'enregistrer qu'une fois)
 
